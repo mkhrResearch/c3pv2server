@@ -1,0 +1,10 @@
+version: '3'
+services:
+  c3pv2server:
+    build: .
+    image: c3pv2server
+    hostname: c3pv2server
+    container_name: c3pv2server
+    tty: true
+    ports:
+      - "2000:22"
