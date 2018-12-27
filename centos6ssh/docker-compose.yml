@@ -7,4 +7,4 @@ services:
     container_name: centos6ssh
     tty: true
     ports:
-      - "2000:22"
+      - "4000:22"
