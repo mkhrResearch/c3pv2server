@@ -1,0 +1,10 @@
+version: '2'
+services:
+  dockerizessh:
+    build: .
+    image: dockerizessh
+    hostname: dockerizessh
+    container_name: dckssh
+    tty: true
+    ports:
+      - "3000:22"
