@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:7
 
 RUN yum update -y
 RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
@@ -46,13 +46,12 @@ RUN chmod 644 /etc/profile.d/script.sh
 
 WORKDIR /root/
 # git install
-RUN yum install -y wget gcc curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker
-RUN wget https://www.kernel.org/pub/software/scm/git/git-2.2.0.tar.gz && tar -zxf git-2.2.0.tar.gz && cd git-2.2.0 && make prefix=/usr/local all && make prefix=/usr/local install
+RUN yum install -y git wget
 
 # lsyncd setting
-RUN wget ftp://ftp.riken.jp/Linux/fedora/epel/6/x86_64/Packages/e/epel-release-6-8.noarch.rpm
-RUN rpm -ivh ./epel-release-6-8.noarch.rpm
-RUN yum install --enablerepo=epel lsyncd -y
+RUN yum install -y epel-release
+RUN sed -i -e "s/enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
+RUN yum --enablerepo=epel install -y lsyncd
 COPY ./lsyncd.conf /etc/lsyncd.conf
 
 # git setting
@@ -73,9 +72,9 @@ RUN chmod u+x /usr/local/bin/init.sh
 COPY ./ace /usr/local/bin/ace
 RUN chmod 755 /usr/local/bin/ace
 
-WORKDIR /root/data/
-RUN cp -a /var/log/ /root/data/
-RUN cp -a /home/ /root/data/
-RUN cp -a /git/ /root/data/
+#WORKDIR /root/data/
+#RUN cp -a /var/log/ /root/data/
+#RUN cp -a /home/ /root/data/
+#RUN cp -a /git/ /root/data/
 
 CMD ["/usr/local/bin/init.sh"]
