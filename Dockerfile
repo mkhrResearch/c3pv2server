@@ -4,7 +4,7 @@ RUN yum update -y
 
 WORKDIR /root/
 # git install
-RUN yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf wget make
+RUN yum -y install gcc curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf wget make
 RUN wget https://www.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
 RUN tar vfx git-2.9.5.tar.gz;cd git-2.9.5;make configure;./configure --prefix=/usr;make all;make install
 
