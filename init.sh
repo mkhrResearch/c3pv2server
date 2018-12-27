@@ -9,6 +9,7 @@ first(){
 init(){
     echo "The following procedure is always invoked"
     rsyslogd
+    /usr/bin/ssh-keygen -A
     /usr/sbin/sshd -D &
     lsyncd -nodaemon /etc/lsyncd.conf &
     echo "container start" >> /var/log/docker_container
