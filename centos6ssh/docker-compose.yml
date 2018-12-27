@@ -1,0 +1,10 @@
+version: '3'
+services:
+  centos6ssh:
+    build: .
+    image: centos6ssh
+    hostname: centos6ssh
+    container_name: centos6ssh
+    tty: true
+    ports:
+      - "2000:22"
