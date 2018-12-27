@@ -1,6 +1,13 @@
 FROM centos:7
 
 RUN yum update -y
+
+WORKDIR /root/
+# git install
+RUN yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf wget
+RUN wget https://www.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz
+RUN tar vfx git-2.9.5.tar.gz;cd git-2.9.5;make configure;./configure --prefix=/usr;make all;make install
+
 RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
@@ -44,9 +51,6 @@ RUN chmod 773 /var/log/script
 COPY ./script.sh /etc/profile.d/
 RUN chmod 644 /etc/profile.d/script.sh
 
-WORKDIR /root/
-# git install
-RUN yum install -y git wget
 
 # lsyncd setting
 RUN yum install -y epel-release
