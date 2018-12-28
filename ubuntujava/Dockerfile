@@ -17,7 +17,7 @@ ADD ./id_rsa1.pub /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 RUN chown root.root /root/.ssh/authorized_keys
 
-RUN useradd user1 -m
+RUN useradd user1 -m -s /bin/bash
 WORKDIR /home/user1/
 COPY ./id_rsa1.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
