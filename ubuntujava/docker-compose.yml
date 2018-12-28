@@ -1,0 +1,11 @@
+version: '2'
+services:
+  ubuntujava:
+    build: .
+    image: ubuntujava
+    hostname: ubuntujava
+    container_name: ubuntujava
+    tty: true
+    privileged: true
+    ports:
+      - "5000:22"
