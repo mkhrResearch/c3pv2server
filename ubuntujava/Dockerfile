@@ -29,6 +29,21 @@ RUN echo 'user1:r00tr00t' |chpasswd
 
 #RUN apt-get install -y rsyslog
 
+RUN apt-get install -y lsyncd
+COPY ./lsyncd.conf /etc/lsyncd.conf
+
+# git setting
+RUN mkdir /git
+RUN git -C /git init
+RUN git -C /git config user.name staff
+RUN git -C /git config user.email staff@softiv.info
+
+COPY ./git-commit.sh /git/git-commit.sh
+RUN chmod 755 /git/git-commit.sh
+
+COPY ./history.sh /etc/profile.d/
+RUN chmod 644 /etc/profile.d/history.sh
+
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
