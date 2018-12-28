@@ -7,4 +7,4 @@ services:
     container_name: c3pv2server
     tty: true
     ports:
-      - "2200:22"
+      - "22000:22"
