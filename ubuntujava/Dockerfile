@@ -27,7 +27,7 @@ RUN chown user1.user1 .ssh/authorized_keys
 COPY ./init.sh /usr/local/bin/init.sh
 RUN chmod u+x /usr/local/bin/init.sh
 
-RUN apt-get install -y rsyslogd
+RUN apt-get install -y rsyslog
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
