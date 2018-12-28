@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt-get install gnupg;echo deb http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;echo deb-src http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;apt-key adv --recv-keys --keyserver keyserver.ubuntu.com AEF0CF8E;apt-get update;apt-get upgrade;apt-get install rsyslog
+RUN apt-get install -y gnupg;echo deb http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;echo deb-src http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;apt-key adv --recv-keys --keyserver keyserver.ubuntu.com AEF0CF8E;apt-get update -y;apt-get upgrade -y;apt-get install -y rsyslog
 
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
