@@ -29,7 +29,7 @@ RUN echo 'user1:r00tr00t' |chpasswd
 
 #RUN apt-get install -y rsyslog
 
-RUN apt-get install -y lsyncd
+RUN apt-get install -y lsyncd git
 COPY ./lsyncd.conf /etc/lsyncd.conf
 
 # git setting
