@@ -6,5 +6,6 @@ services:
     hostname: c3pv2server
     container_name: c3pv2server
     tty: true
+    privileged: true
     ports:
       - "22000:22"
