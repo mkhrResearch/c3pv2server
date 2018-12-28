@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt-get install -y gnupg;echo deb http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;echo deb-src http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;apt-key adv --recv-keys --keyserver keyserver.ubuntu.com AEF0CF8E;apt-get update -y;apt-get upgrade -y;apt-get install -y rsyslog
+RUN apt-get update -y;apt-get install -y gnupg;echo deb http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;echo deb-src http://ubuntu.adiscon.com/v7-devel precise/ >> /etc/apt/sources.list;apt-key adv --recv-keys --keyserver keyserver.ubuntu.com AEF0CF8E;apt-get update -y;apt-get upgrade -y;apt-get install -y rsyslog
 
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
@@ -22,6 +22,7 @@ WORKDIR /home/user1/
 COPY ./id_rsa1.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user1.user1 .ssh/authorized_keys
+RUN echo 'user1:r00tr00t' |chpasswd
 
 #COPY ./init.sh /usr/local/bin/init.sh
 #RUN chmod u+x /usr/local/bin/init.sh
