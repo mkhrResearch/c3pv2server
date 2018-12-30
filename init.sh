@@ -2,9 +2,9 @@
 
 first(){
     echo "The following procedure is invoked only once"
-    #cp -a /root/data/log/ /var/
-    #cp -a /root/data/home/ /
-    #cp -a /root/data/git/ /
+    cp -a /root/data/log/ /var/
+    cp -a /root/data/home/ /
+    cp -a /root/data/git/ /
 }
 init(){
     echo "The following procedure is always invoked"

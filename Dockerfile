@@ -76,10 +76,10 @@ RUN chmod u+x /usr/local/bin/init.sh
 COPY ./ace /usr/local/bin/ace
 RUN chmod 755 /usr/local/bin/ace
 
-#WORKDIR /root/data/
-#RUN cp -a /var/log/ /root/data/
-#RUN cp -a /home/ /root/data/
-#RUN cp -a /git/ /root/data/
+WORKDIR /root/data/
+RUN cp -a /var/log/ /root/data/
+RUN cp -a /home/ /root/data/
+RUN cp -a /git/ /root/data/
 
 RUN systemctl enable lsyncd.service
 CMD ["/usr/local/bin/init.sh"]

@@ -7,5 +7,9 @@ services:
     container_name: c3pv2server
     tty: true
     privileged: true
+    volumes:
+      - ./data/log/:/var/log/
+      - ./data/home/:/home/
+      - ./data/git/:/git/
     ports:
       - "22000:22"
