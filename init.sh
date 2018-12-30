@@ -8,10 +8,6 @@ first(){
 }
 init(){
     echo "The following procedure is always invoked"
-    rsyslogd
-    /usr/bin/ssh-keygen -A
-    /usr/sbin/sshd -D &
-    lsyncd -nodaemon /etc/lsyncd.conf &
     echo "container start" >> /var/log/docker_container
     date >> /var/log/docker_container
 }
@@ -24,12 +20,12 @@ init
 
 cat <<EOF >>~/.bashrc
 function TERMINATE {
-    service rsyslog stop
-    service sshd stop
-    service lsyncd stop
+    systemctl stop rsyslog
+    systemctl stop sshd
+    systemctl stop lsyncd
     echo "container terminate" >> /var/log/docker_container
     date >> /var/log/docker_container
 }
 trap 'TERMINATE; exit 0' TERM
 EOF
-exec /bin/bash
+exec /sbin/init

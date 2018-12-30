@@ -81,6 +81,7 @@ RUN chmod 755 /usr/local/bin/ace
 #RUN cp -a /home/ /root/data/
 #RUN cp -a /git/ /root/data/
 
-#CMD ["/usr/local/bin/init.sh"]
-CMD ["/sbin/init"]
+RUN systemctl enable lsyncd.service
+CMD ["/usr/local/bin/init.sh"]
+#CMD ["/sbin/init"]
 
