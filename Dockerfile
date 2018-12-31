@@ -80,7 +80,9 @@ RUN chown user3.user3 .ssh/authorized_keys
 
 RUN yum -y reinstall glibc-common
 RUN localedef -v -c -i ja_JP -f UTF-8 ja_JP.UTF-8; echo "";
-env LANG=ja_JP.UTF-8
+ENV LANG="ja_JP.UTF-8" \
+    LANGUAGE="ja_JP:ja" \
+    LC_ALL="ja_JP.UTF-8"
 
 WORKDIR /root/data/
 RUN cp -a /var/log/ /root/data/
