@@ -6,5 +6,9 @@ services:
     hostname: centos6ssh
     container_name: centos6ssh
     tty: true
+    volumes:
+      - /root/centos6ssh/log/:/var/log/
+      - /root/centos6ssh/home/:/home/
+      - /root/centos6ssh/git/:/git/
     ports:
-      - "4000:22"
+      - "22001:22"

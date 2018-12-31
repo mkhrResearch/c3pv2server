@@ -8,8 +8,8 @@ services:
     tty: true
     privileged: true
     volumes:
-      - ~/c3pv2server/log/:/var/log/
-      - ~/c3pv2server/home/:/home/
-      - ~/c3pv2server/git/:/git/
+      - /root/c3pv2server/log/:/var/log/
+      - /root/c3pv2server/home/:/home/
+      - /root/c3pv2server/git/:/git/
     ports:
       - "22000:22"
