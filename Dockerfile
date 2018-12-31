@@ -65,21 +65,25 @@ WORKDIR /home/user1/
 COPY ./id_rsa1.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user1.user1 .ssh/authorized_keys
-RUN echo LANG=C.UTF-8 >> .bashrc
+RUN echo export LANG=C.UTF-8 >> .bashrc
 
 RUN useradd user2 -m
 WORKDIR /home/user2/
 COPY ./id_rsa2.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user2.user2 .ssh/authorized_keys
-RUN echo LANG=C.UTF-8 >> .bashrc
+RUN echo export LANG=C.UTF-8 >> .bashrc
 
 RUN useradd user3 -m
 WORKDIR /home/user3/
 COPY ./id_rsa3.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user3.user3 .ssh/authorized_keys
-RUN echo LANG=C.UTF-8 >> .bashrc
+RUN echo export LANG=C.UTF-8 >> .bashrc
+
+RUN yum -y reinstall glibc-common
+RUN localedef -v -c -i ja_JP -f UTF-8 ja_JP.UTF-8; echo "";
+env LANG=ja_JP.UTF-8
 
 WORKDIR /root/data/
 RUN cp -a /var/log/ /root/data/
