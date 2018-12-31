@@ -10,7 +10,6 @@ init(){
     echo "The following procedure is always invoked"
     echo "container start" >> /var/log/docker_container
     date >> /var/log/docker_container
-    export LANG=ja_JP.UTF-8
 }
 
 if [ ! -r /var/log/docker_container ] ; then

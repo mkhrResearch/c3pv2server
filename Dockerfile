@@ -54,6 +54,13 @@ RUN chmod u+x /usr/local/bin/init.sh
 COPY ./ace /usr/local/bin/ace
 RUN chmod 755 /usr/local/bin/ace
 
+
+RUN yum -y reinstall glibc-common
+RUN localedef -v -c -i ja_JP -f UTF-8 ja_JP.UTF-8; echo "";
+ENV LANG="ja_JP.UTF-8" \
+    LANGUAGE="ja_JP:ja" \
+    LC_ALL="ja_JP.UTF-8"
+
 #add ssh user
 ADD ./id_rsa1.pub /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
@@ -65,24 +72,21 @@ WORKDIR /home/user1/
 COPY ./id_rsa1.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user1.user1 .ssh/authorized_keys
+RUN echo "export LANG=ja_JP.UTF-8" >> .bashrc
 
 RUN useradd user2 -m
 WORKDIR /home/user2/
 COPY ./id_rsa2.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user2.user2 .ssh/authorized_keys
+RUN echo "export LANG=ja_JP.UTF-8" >> .bashrc
 
 RUN useradd user3 -m
 WORKDIR /home/user3/
 COPY ./id_rsa3.pub .ssh/authorized_keys
 RUN chmod 600 .ssh/authorized_keys
 RUN chown user3.user3 .ssh/authorized_keys
-
-RUN yum -y reinstall glibc-common
-RUN localedef -v -c -i ja_JP -f UTF-8 ja_JP.UTF-8; echo "";
-ENV LANG="ja_JP.UTF-8" \
-    LANGUAGE="ja_JP:ja" \
-    LC_ALL="ja_JP.UTF-8"
+RUN echo "export LANG=ja_JP.UTF-8" >> .bashrc
 
 WORKDIR /root/data/
 RUN cp -a /var/log/ /root/data/
