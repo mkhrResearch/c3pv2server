@@ -65,7 +65,7 @@ ENV LANG="ja_JP.UTF-8" \
     LC_ALL="ja_JP.UTF-8"
 
 #add ssh user
-ADD ./id_rsa1.pub /root/.ssh/authorized_keys
+ADD ./id_rsa_user1.pub /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 RUN chown root.root /root/.ssh/authorized_keys
 
@@ -73,29 +73,34 @@ RUN chown root.root /root/.ssh/authorized_keys
 RUN groupadd students
 RUN useradd -D -g students
 #RUN sed -i -e "s/USERGROUPS_ENAB yes/USERGROUPS_ENAB no/g" /etc/login.defs
-#RUN sed -i -e "s/UMASK           077/UMASK           070/g" /etc/login.defs
+RUN sed -i -e "s/UMASK           077/UMASK           072/g" /etc/login.defs
 
+ARG USER="user1"
+RUN useradd ${USER} -m
+RUN usermod -aG students ${USER}
+WORKDIR /home/${USER}/
+RUN chgrp students ../${USER}
+COPY ./id_rsa_${USER}.pub .ssh/authorized_keys
+RUN chmod 644 .ssh/authorized_keys;chmod 700 .ssh
+RUN chown -R ${USER}.${USER} .ssh/
 
-RUN useradd user1 -m
-WORKDIR /home/user1/
-COPY ./id_rsa1.pub .ssh/authorized_keys
-RUN chmod 600 .ssh/authorized_keys
-RUN chown user1.user1 .ssh/authorized_keys
-# RUN echo "export LANG=ja_JP.UTF-8" >> .bashrc
+ARG USER="user2"
+RUN useradd ${USER} -m
+RUN usermod -aG students ${USER}
+WORKDIR /home/${USER}/
+RUN chgrp students ../${USER}
+COPY ./id_rsa_${USER}.pub .ssh/authorized_keys
+RUN chmod 644 .ssh/authorized_keys;chmod 700 .ssh
+RUN chown -R ${USER}.${USER} .ssh/
 
-RUN useradd user2 -m
-WORKDIR /home/user2/
-COPY ./id_rsa2.pub .ssh/authorized_keys
-RUN chmod 600 .ssh/authorized_keys
-RUN chown user2.user2 .ssh/authorized_keys
-#RUN echo "export LANG=ja_JP.UTF-8" >> .bashrc
-
-RUN useradd user3 -m
-WORKDIR /home/user3/
-COPY ./id_rsa3.pub .ssh/authorized_keys
-RUN chmod 600 .ssh/authorized_keys
-RUN chown user3.user3 .ssh/authorized_keys
-#RUN echo "export LANG=ja_JP.UTF-8" >> .bashrc
+ARG USER="user3"
+RUN useradd ${USER} -m
+RUN usermod -aG students ${USER}
+WORKDIR /home/${USER}/
+RUN chgrp students ../${USER}
+COPY ./id_rsa_${USER}.pub .ssh/authorized_keys
+RUN chmod 644 .ssh/authorized_keys;chmod 700 .ssh
+RUN chown -R ${USER}.${USER} .ssh/
 
 WORKDIR /root/data/
 RUN cp -a /var/log/ /root/data/
