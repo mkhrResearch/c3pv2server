@@ -69,6 +69,9 @@ ADD ./id_rsa1.pub /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 RUN chown root.root /root/.ssh/authorized_keys
 
+#user settings
+RUN groupadd students
+RUN useradd -D -g students
 
 RUN useradd user1 -m
 WORKDIR /home/user1/
