@@ -72,8 +72,8 @@ RUN chown root.root /root/.ssh/authorized_keys
 #user settings
 RUN groupadd students
 RUN useradd -D -g students
-RUN sed -i -e "s/USERGROUPS_ENAB yes/USERGROUPS_ENAB no/g" /etc/login.defs
-RUN sed -i -e "s/UMASK           077/UMASK           070/g" /etc/login.defs
+#RUN sed -i -e "s/USERGROUPS_ENAB yes/USERGROUPS_ENAB no/g" /etc/login.defs
+#RUN sed -i -e "s/UMASK           077/UMASK           070/g" /etc/login.defs
 
 
 RUN useradd user1 -m
